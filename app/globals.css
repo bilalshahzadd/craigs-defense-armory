@@ -1,0 +1,123 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-display: "Oswald", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #0a0a0b;
+  color: #ffffff;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #f5b31c;
+  color: #0a0a0b;
+}
+
+/* Slim, tactical scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #111113;
+}
+::-webkit-scrollbar-thumb {
+  background: #2e2e33;
+  border-radius: 0;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #f5b31c;
+}
+
+@layer components {
+  /* Angular clip-path shapes — the signature tactical cut corners */
+  .clip-slant-br {
+    clip-path: polygon(0 0, 100% 0, calc(100% - 16px) 100%, 0 100%);
+  }
+  .clip-slant-tr {
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 100%, 0 100%);
+  }
+  .clip-slant-bl {
+    clip-path: polygon(16px 0, 100% 0, 100% 100%, 0 100%);
+  }
+  .clip-slant-both {
+    clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 100%, 18px 100%);
+  }
+  /* The header brand block — a right-leaning parallelogram */
+  .clip-brand {
+    clip-path: polygon(0 0, 100% 0, calc(100% - 46px) 100%, 0 100%);
+  }
+  .clip-notch {
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 14px),
+      calc(100% - 14px) 100%,
+      0 100%
+    );
+  }
+
+  /* Gold gradient text for oversized display headings */
+  .text-gold-grad {
+    background: linear-gradient(180deg, #ffd45e 0%, #f5b31c 55%, #c88e15 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .container-site {
+    width: 100%;
+    max-width: 1440px;
+    margin-inline: auto;
+    padding-inline: 1.5rem;
+  }
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 3rem;
+    }
+  }
+  /* Faint carbon-fiber / grit texture overlay */
+  .bg-grit {
+    background-image: radial-gradient(
+        rgba(255, 255, 255, 0.028) 1px,
+        transparent 1px
+      );
+    background-size: 4px 4px;
+  }
+  .bg-hero-vignette {
+    background: radial-gradient(
+      120% 90% at 70% 40%,
+      rgba(245, 179, 28, 0.08) 0%,
+      rgba(10, 10, 11, 0) 45%
+    );
+  }
+  .diag-lines {
+    background-image: repeating-linear-gradient(
+      -45deg,
+      rgba(245, 179, 28, 0.12) 0,
+      rgba(245, 179, 28, 0.12) 1px,
+      transparent 1px,
+      transparent 9px
+    );
+  }
+}
