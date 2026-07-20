@@ -146,7 +146,7 @@ export function Header() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute left-0 right-0 top-full hidden border-t border-gold/25 bg-ink-800/98 shadow-panel backdrop-blur lg:block"
+                className="absolute left-0 right-0 top-full hidden border-t border-gold/25 bg-ink-800 shadow-panel lg:block"
               >
                 <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/60 to-transparent" />
                 <MegaMenu item={nav[active]} onNavigate={() => setActive(null)} />
