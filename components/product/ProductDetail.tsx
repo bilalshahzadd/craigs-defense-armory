@@ -38,71 +38,87 @@ export async function ProductDetail({ product }: { product: Product }) {
         </div>
       </div>
 
-      {/* Hero */}
+      {/* Hero — centred title + large product shot, buy panel floats bottom-right */}
       <section className="relative overflow-hidden bg-gradient-to-b from-ink-700 to-ink">
         <div className="absolute inset-0 bg-hero-vignette" />
-        <div className="container-site relative grid grid-cols-1 gap-10 py-12 lg:grid-cols-3 lg:py-16">
-          <div className="lg:col-span-2">
-            <div className="flex items-center gap-3">
-              <span className="font-display text-xs font-semibold uppercase tracking-widest2 text-copper">
-                {product.categoryLabel}
-              </span>
-              <span
-                className={cn(
-                  "font-display text-[11px] font-semibold uppercase tracking-widest",
-                  product.stock <= 0
-                    ? "text-red-400"
-                    : product.stock <= 5
-                      ? "text-amber-400"
-                      : "text-emerald-400"
-                )}
-              >
-                • {stockLabel}
-              </span>
-            </div>
-            <h1 className="mt-2 font-display text-4xl font-bold uppercase leading-none tracking-wide text-white sm:text-5xl lg:text-6xl">
-              {product.name}
-            </h1>
-            <p className="mt-3 max-w-xl text-lg text-muted-light">
-              {product.tagline}
-            </p>
 
-            <div className="relative mt-6 aspect-[16/10] overflow-hidden border border-white/8 bg-gradient-to-b from-ink-600 to-ink-800">
+        <div className="container-site relative pt-12 text-center lg:pt-16">
+          <div className="flex items-center justify-center gap-3">
+            <span className="font-display text-[11px] font-semibold uppercase tracking-widest2 text-copper">
+              {product.categoryLabel}
+            </span>
+            <span
+              className={cn(
+                "font-display text-[11px] font-semibold uppercase tracking-widest",
+                product.stock <= 0
+                  ? "text-red-400"
+                  : product.stock <= 5
+                    ? "text-amber-400"
+                    : "text-emerald-400"
+              )}
+            >
+              • {stockLabel}
+            </span>
+          </div>
+
+          <h1 className="mt-4 font-display text-4xl font-light uppercase leading-none tracking-wide text-white sm:text-5xl lg:text-6xl">
+            {product.name}
+          </h1>
+
+          {/* Reference's small downward triangle */}
+          <svg
+            viewBox="0 0 24 16"
+            className="mx-auto mt-6 h-4 w-6 text-copper"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            aria-hidden="true"
+          >
+            <path d="M1.5 1.5 L22.5 1.5 L12 14.5 Z" />
+          </svg>
+
+          <p className="mx-auto mt-6 max-w-xl text-muted-light">
+            {product.tagline}
+          </p>
+        </div>
+
+        <div className="container-site relative pb-14 pt-8 lg:pb-20">
+          <div className="relative">
+            <div className="relative aspect-[16/9] overflow-hidden border border-white/8 bg-gradient-to-b from-ink-600 to-ink-800">
               <Image
                 src={product.image}
                 alt={product.name}
                 fill
                 priority
-                sizes="(max-width: 1024px) 100vw, 66vw"
+                sizes="(max-width: 1024px) 100vw, 1200px"
                 className="object-cover"
               />
-              <div className="pointer-events-none absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-copper/50" />
-              <div className="pointer-events-none absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-copper/50" />
+              <div className="pointer-events-none absolute left-5 top-5 h-14 w-14 border-l-2 border-t-2 border-copper/50" />
+              <div className="pointer-events-none absolute bottom-5 left-5 h-14 w-14 border-b-2 border-l-2 border-copper/50" />
+            </div>
+
+            {/* Floating buy panel */}
+            <div className="mt-6 lg:absolute lg:bottom-8 lg:right-8 lg:mt-0 lg:w-[380px]">
+              <AddToCart product={product} />
             </div>
           </div>
 
-          {/* Buy box */}
-          <div className="lg:col-span-1">
-            <div className="lg:sticky lg:top-28">
-              <AddToCart product={product} />
-              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                {[
-                  { Icon: ShieldCheck, label: "Lifetime\nWarranty" },
-                  { Icon: Wrench, label: "Hand\nAssembled" },
-                  { Icon: Flag, label: "Made in\nUSA" },
-                ].map(({ Icon, label }) => (
-                  <div
-                    key={label}
-                    className="flex flex-col items-center gap-2 border border-white/8 bg-ink-800 py-4"
-                  >
-                    <Icon className="h-5 w-5 text-copper" />
-                    <span className="whitespace-pre-line font-display text-[10px] uppercase leading-tight tracking-widest text-muted">
-                      {label}
-                    </span>
-                  </div>
-                ))}
+          <div className="mt-8 grid grid-cols-3 gap-3 lg:max-w-xl">
+            {[
+              { Icon: ShieldCheck, label: "Lifetime Warranty" },
+              { Icon: Wrench, label: "Hand Assembled" },
+              { Icon: Flag, label: "Made in USA" },
+            ].map(({ Icon, label }) => (
+              <div
+                key={label}
+                className="flex flex-col items-center gap-2 border border-white/8 bg-ink-800/60 py-4 text-center"
+              >
+                <Icon className="h-5 w-5 text-copper" />
+                <span className="font-display text-[10px] uppercase leading-tight tracking-widest text-muted">
+                  {label}
+                </span>
               </div>
-            </div>
+            ))}
           </div>
         </div>
       </section>

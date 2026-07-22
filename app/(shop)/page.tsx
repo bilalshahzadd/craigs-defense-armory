@@ -2,7 +2,10 @@ import Image from "next/image";
 import { Check } from "lucide-react";
 import { HeroCarousel } from "@/components/home/HeroCarousel";
 import { FeatureStrip } from "@/components/home/FeatureStrip";
+import { MarqueeStrip } from "@/components/home/MarqueeStrip";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
+import { ProcessSection } from "@/components/home/ProcessSection";
+import { DealerBand } from "@/components/home/DealerBand";
 import { CategoryCards } from "@/components/home/CategoryCards";
 import { Reveal } from "@/components/ui/Reveal";
 import { AngularButton } from "@/components/ui/AngularButton";
@@ -22,7 +25,9 @@ export default function HomePage() {
     <>
       <HeroCarousel />
       <FeatureStrip />
+      <MarqueeStrip />
       <FeaturedProducts />
+      <ProcessSection />
 
       {/* Brand story band */}
       <section className="relative overflow-hidden bg-ink-800">
@@ -37,8 +42,8 @@ export default function HomePage() {
                 className="object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-ink/50 to-transparent" />
-              <div className="pointer-events-none absolute left-5 top-5 h-16 w-16 border-l-2 border-t-2 border-gold" />
-              <div className="pointer-events-none absolute bottom-5 right-5 h-16 w-16 border-b-2 border-r-2 border-gold" />
+              <div className="pointer-events-none absolute left-5 top-5 h-16 w-16 border-l-2 border-t-2 border-copper" />
+              <div className="pointer-events-none absolute bottom-5 right-5 h-16 w-16 border-b-2 border-r-2 border-copper" />
             </div>
           </Reveal>
 
@@ -78,6 +83,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <DealerBand />
       <CategoryCards />
     </>
   );
