@@ -2,10 +2,6 @@ import type { Metadata } from "next";
 import { Oswald, Inter } from "next/font/google";
 import "./globals.css";
 import { brand } from "@/lib/config";
-import { CartProvider } from "@/components/cart/CartProvider";
-import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
-import { Header } from "@/components/layout/Header";
-import { Footer } from "@/components/layout/Footer";
 
 const display = Oswald({
   subsets: ["latin"],
@@ -21,7 +17,7 @@ const sans = Inter({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://craigsdefense.com"),
+  metadataBase: new URL("https://craigs-defense-armory.vercel.app"),
   title: {
     default: `${brand.fullName} — ${brand.tagline}`,
     template: `%s · ${brand.name}`,
@@ -43,14 +39,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={`${display.variable} ${sans.variable}`}>
-      <body className="bg-ink text-white antialiased">
-        <CartProvider>
-          <AnnouncementBar />
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </CartProvider>
-      </body>
+      <body className="bg-ink text-white antialiased">{children}</body>
     </html>
   );
 }

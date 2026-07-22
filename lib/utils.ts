@@ -13,3 +13,23 @@ export function formatPrice(value: number) {
     minimumFractionDigits: 2,
   }).format(value);
 }
+
+/** URL-safe slug from arbitrary text. */
+export function slugify(input: string): string {
+  return input
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[™®©]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 60);
+}
+
+/** Short, human date for admin tables. */
+export function formatDate(iso: string) {
+  return new Date(iso).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+}

@@ -5,6 +5,10 @@
 :root {
   --font-display: "Oswald", sans-serif;
   --font-sans: "Inter", system-ui, sans-serif;
+  /* Brand accent — copper/bronze, derived from the CDA logo */
+  --copper: #b4703f;
+  --copper-bright: #d9944f;
+  --copper-deep: #57301b;
 }
 
 * {
@@ -24,8 +28,8 @@ body {
 }
 
 ::selection {
-  background: #f5b31c;
-  color: #0a0a0b;
+  background: var(--copper);
+  color: #ffffff;
 }
 
 /* Slim, tactical scrollbar */
@@ -41,7 +45,7 @@ body {
   border-radius: 0;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #f5b31c;
+  background: var(--copper);
 }
 
 @layer components {
@@ -58,7 +62,6 @@ body {
   .clip-slant-both {
     clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 100%, 18px 100%);
   }
-  /* The header brand block — a right-leaning parallelogram */
   .clip-brand {
     clip-path: polygon(0 0, 100% 0, calc(100% - 46px) 100%, 0 100%);
   }
@@ -72,9 +75,9 @@ body {
     );
   }
 
-  /* Gold gradient text for oversized display headings */
+  /* Copper gradient text for oversized display headings */
   .text-gold-grad {
-    background: linear-gradient(180deg, #ffd45e 0%, #f5b31c 55%, #c88e15 100%);
+    background: linear-gradient(180deg, #e3b48c 0%, #b4703f 55%, #7a4526 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -99,25 +102,35 @@ body {
   /* Faint carbon-fiber / grit texture overlay */
   .bg-grit {
     background-image: radial-gradient(
-        rgba(255, 255, 255, 0.028) 1px,
-        transparent 1px
-      );
+      rgba(255, 255, 255, 0.028) 1px,
+      transparent 1px
+    );
     background-size: 4px 4px;
   }
   .bg-hero-vignette {
     background: radial-gradient(
       120% 90% at 70% 40%,
-      rgba(245, 179, 28, 0.08) 0%,
+      rgba(180, 112, 63, 0.1) 0%,
       rgba(10, 10, 11, 0) 45%
     );
   }
   .diag-lines {
     background-image: repeating-linear-gradient(
       -45deg,
-      rgba(245, 179, 28, 0.12) 0,
-      rgba(245, 179, 28, 0.12) 1px,
+      rgba(180, 112, 63, 0.14) 0,
+      rgba(180, 112, 63, 0.14) 1px,
       transparent 1px,
       transparent 9px
     );
+  }
+  /* Subtle hexagonal texture, echoing the logo's carbon pattern */
+  .bg-hex {
+    background-color: transparent;
+    background-image: radial-gradient(
+      circle at 50% 50%,
+      rgba(180, 112, 63, 0.07) 1.5px,
+      transparent 1.6px
+    );
+    background-size: 14px 14px;
   }
 }

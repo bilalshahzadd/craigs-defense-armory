@@ -1,5 +1,19 @@
 import type { Config } from "tailwindcss";
 
+/**
+ * Brand accent is derived from the CDA logo (copper / bronze with metallic
+ * silver edges). `gold` is kept as an alias of `copper` so existing utility
+ * classes (text-gold, bg-gold, border-gold…) pick up the new palette without
+ * touching every component.
+ */
+const copper = {
+  DEFAULT: "#B4703F",
+  bright: "#D9944F",
+  light: "#E3B48C",
+  dark: "#8A5330",
+  deep: "#57301B",
+};
+
 const config: Config = {
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,11 +24,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        gold: {
-          DEFAULT: "#F5B31C",
-          bright: "#FFC72C",
-          dark: "#C88E15",
-          deep: "#8A6410",
+        copper,
+        gold: copper,
+        steel: {
+          DEFAULT: "#DCD2CC",
+          dark: "#A89E98",
         },
         ink: {
           DEFAULT: "#0A0A0B",
@@ -40,7 +54,8 @@ const config: Config = {
         site: "1440px",
       },
       boxShadow: {
-        gold: "0 10px 40px -12px rgba(245, 179, 28, 0.45)",
+        gold: "0 10px 40px -12px rgba(180, 112, 63, 0.5)",
+        copper: "0 10px 40px -12px rgba(180, 112, 63, 0.5)",
         panel: "0 30px 80px -20px rgba(0, 0, 0, 0.85)",
       },
       keyframes: {

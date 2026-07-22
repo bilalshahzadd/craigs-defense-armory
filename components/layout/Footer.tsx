@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { brand } from "@/lib/config";
 import { nav } from "@/lib/data";
-import { LogoMark } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 import { Newsletter } from "./Newsletter";
 import { BackToTop } from "./BackToTop";
 
@@ -63,18 +63,8 @@ export function Footer() {
       <div className="container-site pb-10 pt-4">
         <div className="grid grid-cols-2 gap-8 border-t border-white/10 pt-12 md:grid-cols-4 lg:grid-cols-6">
           <div className="col-span-2 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3">
-              <span className="grid h-10 w-10 place-items-center bg-gold text-ink clip-slant-br">
-                <LogoMark className="h-6 w-6" />
-              </span>
-              <span className="flex flex-col leading-none">
-                <span className="font-display text-2xl font-bold uppercase tracking-wider text-white">
-                  {brand.name}
-                </span>
-                <span className="font-display text-[10px] font-semibold uppercase tracking-[0.3em] text-gold">
-                  {brand.sub}
-                </span>
-              </span>
+            <Link href="/" className="inline-flex">
+              <Logo className="h-14 w-auto" />
             </Link>
             <p className="mt-4 max-w-xs text-sm text-muted">
               {brand.tagline} Every product hand-inspected, test-fired, and

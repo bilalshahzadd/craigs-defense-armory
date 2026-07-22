@@ -1,16 +1,23 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronRight, ShieldCheck, Wrench, Flag } from "lucide-react";
-import { getByCategory, categoryMeta, type Product } from "@/lib/data";
+import { getCategory, getRelatedProducts } from "@/lib/queries";
+import type { Product } from "@/lib/types";
 import { AddToCart } from "./AddToCart";
 import { ProductCard } from "./ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
+import { cn } from "@/lib/utils";
 
-export function ProductDetail({ product }: { product: Product }) {
-  const meta = categoryMeta[product.category];
-  const related = getByCategory(product.category)
-    .filter((p) => p.slug !== product.slug)
-    .slice(0, 4);
+export async function ProductDetail({ product }: { product: Product }) {
+  const meta = await getCategory(product.category);
+  const related = await getRelatedProducts(product.category, product.slug, 4);
+
+  const stockLabel =
+    product.stock <= 0
+      ? "Out of Stock"
+      : product.stock <= 5
+        ? `Only ${product.stock} left`
+        : "In Stock";
 
   return (
     <>
@@ -18,12 +25,12 @@ export function ProductDetail({ product }: { product: Product }) {
       <div className="border-b border-white/10 bg-ink-800">
         <div className="container-site py-4">
           <nav className="flex items-center gap-2 font-display text-xs uppercase tracking-widest text-muted">
-            <Link href="/" className="hover:text-gold">
+            <Link href="/" className="hover:text-copper">
               Home
             </Link>
             <ChevronRight className="h-3 w-3" />
-            <Link href={`/${product.category}`} className="hover:text-gold">
-              {meta.label}
+            <Link href={`/${product.category}`} className="hover:text-copper">
+              {meta?.name ?? product.categoryLabel}
             </Link>
             <ChevronRight className="h-3 w-3" />
             <span className="text-white">{product.name}</span>
@@ -36,9 +43,23 @@ export function ProductDetail({ product }: { product: Product }) {
         <div className="absolute inset-0 bg-hero-vignette" />
         <div className="container-site relative grid grid-cols-1 gap-10 py-12 lg:grid-cols-3 lg:py-16">
           <div className="lg:col-span-2">
-            <span className="font-display text-xs font-semibold uppercase tracking-widest2 text-gold">
-              {product.categoryLabel}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="font-display text-xs font-semibold uppercase tracking-widest2 text-copper">
+                {product.categoryLabel}
+              </span>
+              <span
+                className={cn(
+                  "font-display text-[11px] font-semibold uppercase tracking-widest",
+                  product.stock <= 0
+                    ? "text-red-400"
+                    : product.stock <= 5
+                      ? "text-amber-400"
+                      : "text-emerald-400"
+                )}
+              >
+                • {stockLabel}
+              </span>
+            </div>
             <h1 className="mt-2 font-display text-4xl font-bold uppercase leading-none tracking-wide text-white sm:text-5xl lg:text-6xl">
               {product.name}
             </h1>
@@ -55,8 +76,8 @@ export function ProductDetail({ product }: { product: Product }) {
                 sizes="(max-width: 1024px) 100vw, 66vw"
                 className="object-cover"
               />
-              <div className="pointer-events-none absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-gold/50" />
-              <div className="pointer-events-none absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-gold/50" />
+              <div className="pointer-events-none absolute left-4 top-4 h-12 w-12 border-l-2 border-t-2 border-copper/50" />
+              <div className="pointer-events-none absolute bottom-4 right-4 h-12 w-12 border-b-2 border-r-2 border-copper/50" />
             </div>
           </div>
 
@@ -74,7 +95,7 @@ export function ProductDetail({ product }: { product: Product }) {
                     key={label}
                     className="flex flex-col items-center gap-2 border border-white/8 bg-ink-800 py-4"
                   >
-                    <Icon className="h-5 w-5 text-gold" />
+                    <Icon className="h-5 w-5 text-copper" />
                     <span className="whitespace-pre-line font-display text-[10px] uppercase leading-tight tracking-widest text-muted">
                       {label}
                     </span>
@@ -86,8 +107,8 @@ export function ProductDetail({ product }: { product: Product }) {
         </div>
       </section>
 
-      {/* Spec sheet — light section, mirrors the reference product page */}
-      {product.specGroups && (
+      {/* Spec sheet */}
+      {product.specGroups.length > 0 && (
         <section className="relative bg-white text-ink">
           <div className="container-site grid grid-cols-1 gap-10 py-16 lg:grid-cols-2 lg:py-24">
             <div>
@@ -100,9 +121,11 @@ export function ProductDetail({ product }: { product: Product }) {
                   {product.leadTime.toLowerCase()}.
                 </p>
               )}
-              <p className="mt-5 leading-relaxed text-ink/75">
-                {product.description}
-              </p>
+              {product.description && (
+                <p className="mt-5 leading-relaxed text-ink/75">
+                  {product.description}
+                </p>
+              )}
 
               <div className="mt-10 space-y-9">
                 {product.specGroups.map((group) => (
@@ -113,7 +136,7 @@ export function ProductDetail({ product }: { product: Product }) {
                     <ul className="mt-4 space-y-3">
                       {group.items.map((item) => (
                         <li key={item} className="flex gap-3 text-ink/80">
-                          <span className="mt-1 text-gold-dark">▷</span>
+                          <span className="mt-1 text-copper-dark">▷</span>
                           <span>{item}</span>
                         </li>
                       ))}

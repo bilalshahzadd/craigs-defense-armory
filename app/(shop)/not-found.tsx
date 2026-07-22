@@ -1,12 +1,12 @@
 import { AngularButton } from "@/components/ui/AngularButton";
-import { LogoMark } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 
 export default function NotFound() {
   return (
     <section className="relative flex min-h-[70vh] items-center justify-center overflow-hidden bg-ink">
       <div className="absolute inset-0 diag-lines opacity-10" />
       <div className="container-site relative text-center">
-        <LogoMark className="mx-auto h-14 w-14 text-gold" />
+        <Logo className="mx-auto h-16 w-auto" />
         <p className="mt-8 font-display text-8xl font-bold text-white">404</p>
         <h1 className="mt-2 font-display text-2xl font-semibold uppercase tracking-widest text-gold">
           Off Target

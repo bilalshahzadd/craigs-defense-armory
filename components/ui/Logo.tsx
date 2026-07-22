@@ -1,6 +1,31 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
-/** Angular tactical delta mark. */
+/**
+ * Full CDA lockup (monogram + "CRAIGS DEFENSE ARMORY").
+ * The artwork has transparent background and metallic edges, so it is meant
+ * to sit on a dark surface. Native aspect ratio is 808 x 309.
+ */
+export function Logo({
+  className,
+  priority = false,
+}: {
+  className?: string;
+  priority?: boolean;
+}) {
+  return (
+    <Image
+      src="/cda.png"
+      alt="Craigs Defense Armory"
+      width={808}
+      height={309}
+      priority={priority}
+      className={cn("h-11 w-auto object-contain", className)}
+    />
+  );
+}
+
+/** Compact angular delta mark, kept for tight spaces / icon slots. */
 export function LogoMark({ className }: { className?: string }) {
   return (
     <svg

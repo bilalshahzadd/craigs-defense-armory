@@ -8,6 +8,8 @@ import { Reveal } from "@/components/ui/Reveal";
 import { AngularButton } from "@/components/ui/AngularButton";
 import { IMG } from "@/lib/data";
 
+export const dynamic = "force-dynamic";
+
 const promises = [
   "Assembled by hand, one at a time",
   "Test-fired & inspected by a gunsmith",

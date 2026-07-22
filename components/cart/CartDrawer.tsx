@@ -133,7 +133,12 @@ export function CartDrawer() {
                     {formatPrice(subtotal)}
                   </span>
                 </div>
-                <AngularButton size="lg" className="w-full">
+                <AngularButton
+                  href="/checkout"
+                  size="lg"
+                  className="w-full"
+                  onClick={close}
+                >
                   Checkout
                 </AngularButton>
                 <p className="mt-3 text-center text-xs text-muted">

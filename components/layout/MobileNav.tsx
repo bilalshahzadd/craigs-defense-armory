@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ChevronDown, X } from "lucide-react";
 import { nav } from "@/lib/data";
 import { brand } from "@/lib/config";
-import { LogoMark } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/lib/utils";
 
 export function MobileNav({
@@ -42,12 +42,7 @@ export function MobileNav({
                 onClick={onClose}
                 className="flex items-center gap-2"
               >
-                <span className="grid h-9 w-9 place-items-center bg-gold text-ink clip-slant-br">
-                  <LogoMark className="h-5 w-5" />
-                </span>
-                <span className="font-display text-lg font-bold uppercase tracking-widest">
-                  {brand.name}
-                </span>
+                <Logo className="h-9 w-auto" />
               </Link>
               <button
                 onClick={onClose}

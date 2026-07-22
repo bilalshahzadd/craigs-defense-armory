@@ -1,27 +1,19 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { products } from "@/lib/data";
+import { getFeaturedProducts } from "@/lib/queries";
 import { ProductCard } from "@/components/product/ProductCard";
 import { Reveal } from "@/components/ui/Reveal";
 
-const featured = [
-  "model-1-rifle",
-  "vertex-cbx-trigger",
-  "raptor-charging-handle",
-  "model-1-pistol",
-];
-
-export function FeaturedProducts() {
-  const list = featured
-    .map((slug) => products.find((p) => p.slug === slug))
-    .filter((p): p is (typeof products)[number] => Boolean(p));
+export async function FeaturedProducts() {
+  const list = await getFeaturedProducts(4);
+  if (list.length === 0) return null;
 
   return (
     <section className="bg-ink py-20 lg:py-28">
       <div className="container-site">
         <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-end">
           <div>
-            <span className="font-display text-xs font-semibold uppercase tracking-widest2 text-gold">
+            <span className="font-display text-xs font-semibold uppercase tracking-widest2 text-copper">
               Best Sellers
             </span>
             <h2 className="mt-2 font-display text-4xl font-bold uppercase tracking-wide text-white lg:text-5xl">
@@ -30,7 +22,7 @@ export function FeaturedProducts() {
           </div>
           <Link
             href="/rifles"
-            className="group inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-widest text-gold"
+            className="group inline-flex items-center gap-2 font-display text-sm font-semibold uppercase tracking-widest text-copper"
           >
             Shop All
             <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />

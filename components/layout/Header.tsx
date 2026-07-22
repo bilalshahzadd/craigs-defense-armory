@@ -7,7 +7,7 @@ import { Crosshair, Menu, Search, ShoppingCart, User } from "lucide-react";
 import { nav } from "@/lib/data";
 import { brand } from "@/lib/config";
 import { cn } from "@/lib/utils";
-import { LogoMark } from "@/components/ui/Logo";
+import { Logo } from "@/components/ui/Logo";
 import { useCart } from "@/components/cart/CartProvider";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 import { MegaMenu } from "./MegaMenu";
@@ -49,18 +49,10 @@ export function Header() {
             {/* Brand block */}
             <Link
               href="/"
-              className="relative z-10 flex items-center gap-3 bg-gold pl-5 pr-12 text-ink clip-brand sm:pr-16"
+              className="relative z-10 flex shrink-0 items-center pl-5 pr-6 sm:pr-10"
               aria-label={brand.fullName}
             >
-              <LogoMark className="h-8 w-8 sm:h-9 sm:w-9" />
-              <span className="hidden flex-col leading-none sm:flex">
-                <span className="font-display text-lg font-bold uppercase tracking-wider">
-                  {brand.name}
-                </span>
-                <span className="font-display text-[9px] font-semibold uppercase tracking-[0.34em]">
-                  {brand.sub}
-                </span>
-              </span>
+              <Logo priority className="h-9 w-auto sm:h-11" />
             </Link>
 
             <div className="flex flex-1 items-center pl-6 pr-4 sm:pr-6 lg:pl-10">
