@@ -1,6 +1,4 @@
-import Image from "next/image";
 import { Factory, Hammer, Target, Award } from "lucide-react";
-import { IMG } from "@/lib/data";
 import { AngularButton } from "@/components/ui/AngularButton";
 import { Reveal } from "@/components/ui/Reveal";
 
@@ -29,16 +27,11 @@ const reasons = [
 
 export function WhyChooseUs() {
   return (
-    <section className="relative overflow-hidden">
-      <Image
-        src={IMG.rifleDesert}
-        alt=""
-        fill
-        sizes="100vw"
-        className="object-cover object-center"
-      />
-      <div className="absolute inset-0 bg-ink/88" />
-      <div className="absolute inset-0 bg-hex opacity-50" />
+    <section className="relative overflow-hidden border-y border-white/10 bg-ink-800">
+      {/* Dark, on-theme texture — no photo */}
+      <div className="absolute inset-0 bg-hex opacity-60" />
+      <div className="absolute inset-0 bg-hero-vignette" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-copper/50 to-transparent" />
 
       <div className="container-site relative py-20 lg:py-28">
         <div className="mx-auto max-w-2xl text-center">
@@ -57,7 +50,7 @@ export function WhyChooseUs() {
         <div className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {reasons.map(({ Icon, title, text }, i) => (
             <Reveal key={title} delayIndex={i}>
-              <div className="group h-full border border-white/10 bg-ink-800/70 p-7 backdrop-blur-sm transition-colors hover:border-copper/50">
+              <div className="group h-full border border-white/10 bg-ink-700 p-7 transition-colors hover:border-copper/50">
                 <span className="grid h-12 w-12 place-items-center bg-copper/15 text-copper transition-colors clip-slant-br group-hover:bg-copper group-hover:text-white">
                   <Icon className="h-6 w-6" />
                 </span>
