@@ -5,7 +5,7 @@ import { FeatureStrip } from "@/components/home/FeatureStrip";
 import { MarqueeStrip } from "@/components/home/MarqueeStrip";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { ProcessSection } from "@/components/home/ProcessSection";
-import { DealerBand } from "@/components/home/DealerBand";
+import { WhyChooseUs } from "@/components/home/WhyChooseUs";
 import { CategoryCards } from "@/components/home/CategoryCards";
 import { Reveal } from "@/components/ui/Reveal";
 import { AngularButton } from "@/components/ui/AngularButton";
@@ -83,7 +83,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <DealerBand />
+      <WhyChooseUs />
       <CategoryCards />
     </>
   );
