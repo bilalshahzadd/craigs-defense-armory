@@ -11,6 +11,8 @@ import type { LoginEvent } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
+export const revalidate = 0;
 
 function deviceLabel(ua: string | null): string {
   if (!ua) return "Unknown device";
