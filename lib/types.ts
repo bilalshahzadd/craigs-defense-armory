@@ -53,6 +53,17 @@ export interface Order {
   createdAt: string;
 }
 
+export interface LoginEvent {
+  id: number;
+  success: boolean;
+  ip: string | null;
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  userAgent: string | null;
+  createdAt: string;
+}
+
 export interface DashboardStats {
   totalProducts: number;
   activeProducts: number;

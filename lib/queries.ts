@@ -2,6 +2,7 @@ import { sql, LOW_STOCK_THRESHOLD } from "./db";
 import type {
   Category,
   DashboardStats,
+  LoginEvent,
   Order,
   OrderItem,
   Product,
@@ -301,4 +302,57 @@ export async function getLowStockProducts(): Promise<Product[]> {
     order by stock asc
     limit 8`;
   return rows.map(toProduct);
+}
+
+/* ------------------------------------------------------------------ */
+/*  Admin — login activity                                             */
+/* ------------------------------------------------------------------ */
+function toLoginEvent(r: Row): LoginEvent {
+  return {
+    id: Number(r.id),
+    success: Boolean(r.success),
+    ip: (r.ip as string) ?? null,
+    city: (r.city as string) ?? null,
+    region: (r.region as string) ?? null,
+    country: (r.country as string) ?? null,
+    userAgent: (r.user_agent as string) ?? null,
+    createdAt: new Date(r.created_at as string).toISOString(),
+  };
+}
+
+export async function logLoginEvent(e: {
+  success: boolean;
+  ip: string | null;
+  city: string | null;
+  region: string | null;
+  country: string | null;
+  userAgent: string | null;
+}) {
+  await sql`
+    insert into login_events (success, ip, city, region, country, user_agent)
+    values (${e.success}, ${e.ip}, ${e.city}, ${e.region}, ${e.country}, ${e.userAgent})`;
+}
+
+export async function getLoginEvents(limit = 100): Promise<LoginEvent[]> {
+  const rows = await sql`
+    select * from login_events order by created_at desc limit ${limit}`;
+  return rows.map(toLoginEvent);
+}
+
+export async function getLoginStats(): Promise<{
+  successes: number;
+  failures: number;
+  last30d: number;
+}> {
+  const [r] = await sql`
+    select
+      count(*) filter (where success)::int as successes,
+      count(*) filter (where not success)::int as failures,
+      count(*) filter (where success and created_at > now() - interval '30 days')::int as last30d
+    from login_events`;
+  return {
+    successes: Number(r.successes),
+    failures: Number(r.failures),
+    last30d: Number(r.last30d),
+  };
 }

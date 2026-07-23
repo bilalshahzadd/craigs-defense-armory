@@ -7,6 +7,7 @@ import {
   Package,
   FolderTree,
   ReceiptText,
+  Activity,
   Store,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,6 +17,7 @@ const links = [
   { href: "/admin/products", label: "Products", Icon: Package },
   { href: "/admin/categories", label: "Categories", Icon: FolderTree },
   { href: "/admin/orders", label: "Orders", Icon: ReceiptText },
+  { href: "/admin/activity", label: "Activity", Icon: Activity },
 ];
 
 export function AdminNav() {
